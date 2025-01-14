@@ -28,3 +28,20 @@ option `-f, --fields=LIST` : select only these fields
 
 ### bash script
 `$#` : this variable holds the number of arguments passed to the script
+
+
+## Docker
+Ubuntu env Dockerfile + basic configurations for Nginx
+
+`docker buildx build -t [CONTAINER_NAME] .`
+
+`docker run -p 8080:80 -v $(pwd):/var/www/html/app -d [CONTAINER_NAME]`
+
+`docker exec -it [CONTAINER_ID] bash`
+
+## ex06
+### Differences between file(), file_get_contents() and fopen()
+file — Reads entire file contents into an array of lines.
+file_get_contents — Reads entire file contents into a string.
+fopen — Opens a file handle that can be manipulated with other library functions, but does no reading or writing itself.
+
