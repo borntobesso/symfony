@@ -17,7 +17,7 @@ class Text
 	{
 		$html = "";
 		foreach ($this->strings as $string) {
-			$html = $html . "<p>$string</p>";
+			$html .= "<p>$string</p>";
 		}
 		return $html;
 	}

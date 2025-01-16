@@ -1,14 +1,22 @@
 <?php
 class TemplateEngine
 {
-    function createFile($fileName, $text)
+    function createFile(HotBeverage $text)
     {
-        $content =
-            "<!DOCTYPE html>\n<html>\n\t<head>\n\t\t<title>Generated Page</title>\n\t</head>\n\t<body>\n\t\t<h1>The Lord of the Rings</h1>\n\t\t";
-        $bodyContent = $text->readData();
-        $content = $content . $bodyContent;
-        $content = $content .
-            "\n\t</body>\n</html>";
-        file_put_contents($fileName, $content);
+        $templateContents = file_get_contents("template.html");
+        $reflection = new ReflectionClass($text);
+        $properties = $reflection->getProperties();
+        foreach ($properties as $property) {
+            $propName = $property->name;
+            $methodName = "get_" . $propName;
+            $parameters[$propName] = $text->$methodName();
+        }
+        $newContents = preg_replace_callback("/{(.+?)}/", function ($matches) use ($parameters) {
+            $prop = $matches[1];
+            if ($prop == "nom")
+                $prop = "name";
+            return $parameters[$prop];
+        }, $templateContents);
+        file_put_contents($text->name . ".html", $newContents);
     }
 }

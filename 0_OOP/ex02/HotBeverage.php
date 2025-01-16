@@ -22,3 +22,4 @@ class HotBeverage
 		return $this->resistance;
 	}
 }
+?>

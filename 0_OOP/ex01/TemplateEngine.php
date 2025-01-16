@@ -3,12 +3,19 @@ class TemplateEngine
 {
     function createFile($fileName, $text)
     {
-        $content =
-            "<!DOCTYPE html>\n<html>\n\t<head>\n\t\t<title>Generated Page</title>\n\t</head>\n\t<body>\n\t\t<h1>The Lord of the Rings</h1>\n\t\t";
+        $content = "<!DOCTYPE html>\n<html>\n";
+        $content .= "\t<head>\n";
+        $content .= "\t\t<title>Generated Page</title>\n";
+        $content .= "\t</head>\n";
+        $content .= "\t<body>\n";
+        $content .= "\t\t<h1>The Lord of the Rings</h1>\n";
+        $content .= "\t\t";
+
         $bodyContent = $text->readData();
-        $content = $content . $bodyContent;
-        $content = $content .
-            "\n\t</body>\n</html>";
+        $content .= $bodyContent;
+
+        $content .= "\n\t</body>\n";
+        $content .= "</html>";
         file_put_contents($fileName, $content);
     }
 }
